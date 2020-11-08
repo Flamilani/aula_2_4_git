@@ -1,4 +1,5 @@
-const express = require('express');
+// import express no app.js
+import express from 'express';
 import { studentRouter } from './routes/studentRouter.js';
 
 const app = express();
