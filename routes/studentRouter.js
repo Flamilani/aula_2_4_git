@@ -1,6 +1,5 @@
 import { studentModel } from '../models/studentModel';
-
-const express = require('express');
+import express from 'express';
 
 const app = express();
 
