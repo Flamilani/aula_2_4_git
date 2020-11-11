@@ -1,19 +1,30 @@
 // import express no app.js
 import express from 'express';
 import mongoose from 'mongoose';
-// import { studentRouter } from './routes/studentRouter.js';
+import { studentRouter } from './routes/studentRouter.js';
 
 const app = express();
 
-async () => {
+require('dotenv').config();
+
+(async () => {
   try {
-    await mongoose.connect();
+    await mongoose.connect(
+      `mongodb+srv://{
+        $process.env.USERDB}
+      ':'{$process.env.PWDDB}
+      @cluster0.w4joa.mongodb.net/grades?retryWrites=true&w=majority`,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
   } catch (error) {
     console.log('Erro ao conectar no MongoDB');
   }
-};
+})();
 
 app.use(express.json());
-//app.use(studentRouter);
+app.use(studentRouter);
 
-app.listen(3000, () => console.log('API rodando'));
+app.listen(process.env.PORT, () => console.log('API rodando'));
